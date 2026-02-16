@@ -8,10 +8,10 @@ This script calculates the total cost of sales from a sales record file,
 based on prices from a product catalogue file.
 
 Usage:
-    python compute_sales.py <path_to_price_catalogue> <path_to_sales_record>
+    python source/compute_sales.py <price_catalogue.json> <sales_record.json>
 
 Example:
-    python compute_sales.py ProductList.json TC1/TC1.sales.json
+    python source/compute_sales.py source/ProductList.json <sales_file>.json
 """
 
 import json
@@ -79,14 +79,18 @@ def compute_total_cost(price_lookup, sales_record):
             product_name = sale['Product']
             quantity = sale['Quantity']
             if product_name not in price_lookup:
-                print(f"Warning: Product '{product_name}' from sale #{i} "
-                      f"not in price catalogue. Skipping.")
+                print(
+                    f"Warning: Product '{product_name}' from sale #{i} "
+                    f"not in price catalogue. Skipping."
+                )
                 continue
             price = price_lookup[product_name]
             total_cost += price * quantity
         except (KeyError, TypeError) as e:
-            print(f"Warning: Malformed sale record #{i}. Skipping. "
-                  f"Error: {e}. Record: {sale}")
+            print(
+                f"Warning: Malformed sale record #{i}. Skipping. "
+                f"Error: {e}. Record: {sale}"
+            )
     return total_cost
 
 
@@ -95,8 +99,11 @@ def main():
     start_time = time.time()
 
     if len(sys.argv) != 3:
-        print(f"Usage: python {sys.argv[0]} <price_catalogue.json> "
-              f"<sales_record.json>")
+        usage_msg = (
+            f"Usage: python {sys.argv[0]} <price_catalogue.json> "
+            f"<sales_record.json>"
+        )
+        print(usage_msg)
         sys.exit(1)
 
     price_catalogue_path = sys.argv[1]
@@ -112,8 +119,8 @@ def main():
     total_cost = compute_total_cost(price_lookup, sales_record_data)
     elapsed_time = time.time() - start_time
 
-    output_content = f"Total Cost: ${total_cost:,.2f}\n\n" \
-        f"Execution Time: {elapsed_time:.4f} seconds\n"
+    output_content = (f"Total Cost: ${total_cost:,.2f}\n\n"
+                      f"Execution Time: {elapsed_time:.4f} seconds\n")
 
     print(output_content)
 
