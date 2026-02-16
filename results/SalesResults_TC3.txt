@@ -1,0 +1,3 @@
+Total Cost: $165,235.37
+
+Execution Time: 0.0236 seconds
