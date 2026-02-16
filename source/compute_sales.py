@@ -38,7 +38,7 @@ def load_json_file(filepath):
         print(f"Error: File not found at '{filepath}'.")
     except json.JSONDecodeError:
         print(f"Error: Could not decode JSON from '{filepath}'.")
-    except Exception as e:
+    except OSError as e:
         print(f"An unexpected error occurred while reading '{filepath}': {e}")
     return None
 
