@@ -13,6 +13,7 @@ This program is a Python script that calculates the total cost of sales from a s
 - Python 3.x
 - `pytest` (for running unit tests)
 - `pylint` (for static code analysis)
+- `flake8` (for style checking)
 
 ## Execution
 
@@ -31,9 +32,24 @@ python source/compute_sales.py source/ProductList.json sales.json
 The program will print the total cost to the console and save the output to `results/SalesResults.txt`.
 
 ### Running Tests
-To run the unit tests, ensure `pytest` is installed (`pip install pytest`) and run the following command from the project's root directory:
+Unit tests are provided to verify the file loading, data processing, and calculation logic. To run the tests, ensure `pytest` is installed (`pip install pytest`) and run the following command from the project's root directory:
 ```bash
-pytest
+pytest -v
+```
+
+### Running Linters and Style Checks 
+To ensure code quality and adherence to style guidelines, you can run pylint and flake8. 
+
+Pylint 
+```bash
+pylint source/compute_sales.py
+pylint tests/test_compute_sales.py
+```
+
+Flake8 
+```bash
+flake8 source/compute_sales.py
+flake8 tests/test_compute_sales.py
 ```
 
 ## Author
